@@ -30,10 +30,12 @@
     "characters": "Characters",
     "episodes": "Episodes",
     "locations": "Locations",
+    "quiz": "Quiz",
     "favorites": "Favorites",
     "profile": "Profile",
     "settings": "Settings",
-    "about": "About"
+    "about": "About",
+    "admin": "Admin"
   },
   "characters": {
     "title": "Characters",

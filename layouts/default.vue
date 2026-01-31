@@ -204,6 +204,7 @@ const navigationItems = computed(() => [
   { key: 'characters', label: 'navigation.characters', to: '/characters' },
   { key: 'episodes', label: 'navigation.episodes', to: '/episodes' },
   { key: 'locations', label: 'navigation.locations', to: '/locations' },
+  { key: 'quiz', label: 'navigation.quiz', to: '/quiz' },
   { key: 'favorites', label: 'navigation.favorites', to: '/favorites' }
 ])
 
