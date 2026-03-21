@@ -4,14 +4,10 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/eslint-module',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt',
     '@vueuse/nuxt'
   ],
   plugins: [
     '~/plugins/api.ts'
-  ],
-  extends: [
-    'nuxt-seo-kit'
   ],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate']
@@ -19,9 +15,6 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
     vscode: {}
-  },
-  linkChecker: {
-    failOn404: true
   },
   runtimeConfig: {
     public: {
