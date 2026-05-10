@@ -9,7 +9,7 @@
      9|jobs:
     10|  validate:
     11|    name: Validar Linting e Formatacao
-    12|    runs-on: ubuntu-latest
+    12|    runs-on: self-hosted
     13|    timeout-minutes: 10
     14|    continue-on-error: true
     15|    steps:
@@ -32,7 +32,7 @@
     32|
     33|  build:
     34|    name: Build do Projeto
-    35|    runs-on: ubuntu-latest
+    35|    runs-on: self-hosted
     36|    timeout-minutes: 15
     37|    env:
     38|      NUXT_PUBLIC_BASE_URL: ""
@@ -68,7 +68,7 @@
     68|
     69|  security:
     70|    name: Auditoria de Seguranca
-    71|    runs-on: ubuntu-latest
+    71|    runs-on: self-hosted
     72|    timeout-minutes: 10
     73|    continue-on-error: true
     74|    steps:
