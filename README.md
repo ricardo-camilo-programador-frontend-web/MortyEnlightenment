@@ -1,3 +1,4 @@
+[![CI](https://github.com/ricardo-camilo-programador-frontend-web/MortyEnlightenment/actions/workflows/ci.yml/badge.svg)](https://github.com/ricardo-camilo-programador-frontend-web/MortyEnlightenment/actions)
 # 🧪 Morty Enlightenment
 
 <div align="center">
