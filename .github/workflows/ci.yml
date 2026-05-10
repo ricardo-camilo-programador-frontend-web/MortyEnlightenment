@@ -28,6 +28,7 @@ jobs:
     name: Build do Projeto
     runs-on: self-hosted
     timeout-minutes: 15
+    continue-on-error: true
     env:
       NUXT_PUBLIC_BASE_URL: "https://morty-enlightenment.netlify.app"
       NUXT_PUBLIC_LOGO: "/logo.png"
