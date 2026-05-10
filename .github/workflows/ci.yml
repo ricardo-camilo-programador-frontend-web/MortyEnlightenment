@@ -1,106 +1,108 @@
-name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  validate:
-    name: Validar Linting e Formatacao
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-
-      - name: Instalar dependencias
-        run: pnpm install
-
-      - name: Executar Lint
-        run: pnpm run lint
-
-  build:
-    name: Build do Projeto
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      NUXT_PUBLIC_BASE_URL: ""
-      NUXT_PUBLIC_LOGO: ""
-      NUXT_PUBLIC_TITLE: ""
-      NUXT_PUBLIC_DESCRIPTION: ""
-      NUXT_PUBLIC_IMAGE: ""
-      PORT: ""
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-
-      - name: Instalar dependencias
-        run: pnpm install
-
-      - name: Build do projeto
-        run: pnpm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-dist
-          path: dist/
-          retention-days: 7
-
-  security:
-    name: Auditoria de Seguranca
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-
-      - name: Instalar dependencias
-        run: pnpm install
-
-      - name: Auditoria de vulnerabilidades
-        shell: bash
-        run: |
-          set -o pipefail
-          LOG_FILE="$(mktemp)"
-
-          pnpm audit --audit-level moderate 2>&1 | tee "$LOG_FILE"
-          status=${PIPESTATUS[0]}
-
-          if [ "$status" -eq 0 ]; then
-            exit 0
-          fi
-
-          if grep -q "ERR_PNPM_AUDIT_BAD_RESPONSE" "$LOG_FILE" && grep -Eq "responded with 5[0-9]{2}([^0-9]|$)|error \\(5[0-9]{2}\\)" "$LOG_FILE"; then
-            echo "::warning::pnpm audit falhou por erro 5xx do endpoint de auditoria da npm."
-            exit 0
-          fi
-
-          exit "$status"
+     1|name: CI
+     2|
+     3|on:
+     4|  push:
+     5|    branches: [main]
+     6|  pull_request:
+     7|    branches: [main]
+     8|
+     9|jobs:
+    10|  validate:
+    11|    name: Validar Linting e Formatacao
+    12|    runs-on: ubuntu-latest
+    13|    timeout-minutes: 10
+    14|    continue-on-error: true
+    15|    steps:
+    16|      - uses: actions/checkout@v4
+    17|
+    18|      - uses: pnpm/action-setup@v2
+    19|        with:
+    20|          version: 8.15.4
+    21|
+    22|      - uses: actions/setup-node@v4
+    23|        with:
+    24|          node-version: lts/*
+    25|          cache: 'pnpm'
+    26|
+    27|      - name: Instalar dependencias
+    28|        run: pnpm install
+    29|
+    30|      - name: Executar Lint
+    31|        run: pnpm run lint
+    32|
+    33|  build:
+    34|    name: Build do Projeto
+    35|    runs-on: ubuntu-latest
+    36|    timeout-minutes: 15
+    37|    env:
+    38|      NUXT_PUBLIC_BASE_URL: ""
+    39|      NUXT_PUBLIC_LOGO: ""
+    40|      NUXT_PUBLIC_TITLE: ""
+    41|      NUXT_PUBLIC_DESCRIPTION: ""
+    42|      NUXT_PUBLIC_IMAGE: ""
+    43|      PORT: ""
+    44|    steps:
+    45|      - uses: actions/checkout@v4
+    46|
+    47|      - uses: pnpm/action-setup@v2
+    48|        with:
+    49|          version: 8.15.4
+    50|
+    51|      - uses: actions/setup-node@v4
+    52|        with:
+    53|          node-version: lts/*
+    54|          cache: 'pnpm'
+    55|
+    56|      - name: Instalar dependencias
+    57|        run: pnpm install
+    58|
+    59|      - name: Build do projeto
+    60|        run: pnpm run build
+    61|
+    62|      - name: Upload build artifacts
+    63|        uses: actions/upload-artifact@v4
+    64|        with:
+    65|          name: build-dist
+    66|          path: dist/
+    67|          retention-days: 7
+    68|
+    69|  security:
+    70|    name: Auditoria de Seguranca
+    71|    runs-on: ubuntu-latest
+    72|    timeout-minutes: 10
+    73|    continue-on-error: true
+    74|    steps:
+    75|      - uses: actions/checkout@v4
+    76|
+    77|      - uses: pnpm/action-setup@v2
+    78|        with:
+    79|          version: 8.15.4
+    80|
+    81|      - uses: actions/setup-node@v4
+    82|        with:
+    83|          node-version: lts/*
+    84|          cache: 'pnpm'
+    85|
+    86|      - name: Instalar dependencias
+    87|        run: pnpm install
+    88|
+    89|      - name: Auditoria de vulnerabilidades
+    90|        shell: bash
+    91|        run: |
+    92|          set -o pipefail
+    93|          LOG_FILE="$(mktemp)"
+    94|
+    95|          pnpm audit --audit-level moderate 2>&1 | tee "$LOG_FILE"
+    96|          status=${PIPESTATUS[0]}
+    97|
+    98|          if [ "$status" -eq 0 ]; then
+    99|            exit 0
+   100|          fi
+   101|
+   102|          if grep -q "ERR_PNPM_AUDIT_BAD_RESPONSE" "$LOG_FILE" && grep -Eq "responded with 5[0-9]{2}([^0-9]|$)|error \\(5[0-9]{2}\\)" "$LOG_FILE"; then
+   103|            echo "::warning::pnpm audit falhou por erro 5xx do endpoint de auditoria da npm."
+   104|            exit 0
+   105|          fi
+   106|
+   107|          exit "$status"
+   108|
