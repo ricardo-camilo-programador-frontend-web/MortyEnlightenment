@@ -33,13 +33,13 @@ jobs:
     name: Build do Projeto
     runs-on: ubuntu-latest
     timeout-minutes: 15
-        env:
-          NUXT_PUBLIC_BASE_URL: ""
-          NUXT_PUBLIC_LOGO: ""
-          NUXT_PUBLIC_TITLE: ""
-          NUXT_PUBLIC_DESCRIPTION: ""
-          NUXT_PUBLIC_IMAGE: ""
-          PORT: ""
+    env:
+      NUXT_PUBLIC_BASE_URL: ""
+      NUXT_PUBLIC_LOGO: ""
+      NUXT_PUBLIC_TITLE: ""
+      NUXT_PUBLIC_DESCRIPTION: ""
+      NUXT_PUBLIC_IMAGE: ""
+      PORT: ""
     steps:
       - uses: actions/checkout@v4
 
