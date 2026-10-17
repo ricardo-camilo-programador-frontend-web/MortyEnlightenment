@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt'
   ],
   plugins: [
-    '~/plugins/api.ts'
+    '~/plugins/api.ts',
+    '~/plugins/analytics.client.ts'
   ],
   extends: [
     'nuxt-seo-kit'
@@ -28,7 +29,17 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://github.com/ricardo564',
       siteName: 'Awesome basic configuration Site',
       siteDescription: 'Description base of the site.',
-      language: 'en'
+      language: 'en',
+      clarityId: '',
+      ga4Id: '',
+      gtmId: '',
+      gtmEnabled: '',
+      gtmGa4Id: '',
+      counterId: '',
+      counterUtcOffset: '',
+      analyticsEnabled: '',
+      gaMeasurementId: '',
+      counterDevId: ''
     }
   }
 })
