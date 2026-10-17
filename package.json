@@ -2,6 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "type": "commonjs",
+  "packageManager": "pnpm@7.33.7",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
