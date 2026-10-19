@@ -50,3 +50,4 @@ Verificação: pnpm lint, npx nuxi typecheck (ou vue-tsc), pnpm test, pnpm build
 ### Pendencias
 - Nenhuma pendencia tecnica local (lint, tsc, test e build passam com zero erros).
 - Push pendente de autorizacao expressa do Ricardo (regra estrita: nao fazer push).
+- Follow-up: publish do Netlify apontava para dist em cache (artefatos antigos); fixado .output/public no netlify.toml.
