@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
+  nitro: {
+    preset: 'static'
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/eslint-module',
@@ -11,25 +15,16 @@ export default defineNuxtConfig({
     '~/plugins/api.ts',
     '~/plugins/analytics.client.ts'
   ],
-  extends: [
-    'nuxt-seo-kit'
-  ],
-  pinia: {
-    autoImports: ['defineStore', 'acceptHMRUpdate']
-  },
   devtools: {
     enabled: true,
     vscode: {}
   },
-  linkChecker: {
-    failOn404: true
-  },
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://github.com/ricardo564',
-      siteName: 'Awesome basic configuration Site',
-      siteDescription: 'Description base of the site.',
-      language: 'en',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://morty-enlightenment.netlify.app',
+      siteName: 'Morty Enlightenment',
+      siteDescription: 'Catalogo interativo e explorador de personagens do multiverso de Rick and Morty.',
+      language: 'pt-BR',
       clarityId: '',
       ga4Id: '',
       gtmId: '',

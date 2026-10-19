@@ -35,12 +35,12 @@ export const ANALYTICS_DEFAULTS = {
 
 const PLACEHOLDER_IDS = new Set(['G-XXXXXXXXXX', 'GTM-XXXXXXX'])
 
-function resolveValue(value: string | boolean | number | undefined, fallback: string): string {
+function resolveValue (value: string | boolean | number | undefined, fallback: string): string {
   const trimmed = String(value ?? '').trim()
   return trimmed === '' || PLACEHOLDER_IDS.has(trimmed) ? fallback : trimmed
 }
 
-export function resolveAnalyticsConfig(env: AnalyticsEnv = {}): AnalyticsConfig {
+export function resolveAnalyticsConfig (env: AnalyticsEnv = {}): AnalyticsConfig {
   const ga4Id = resolveValue(env.GA4_ID, resolveValue(env.GA_MEASUREMENT_ID, ANALYTICS_DEFAULTS.ga4Id))
   const gtmGa4Id = resolveValue(env.GTM_GA4_ID, ANALYTICS_DEFAULTS.gtmGa4Id)
   const gtmId = resolveValue(env.GTM_ID, ANALYTICS_DEFAULTS.gtmId)
