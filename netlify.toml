@@ -1,3 +1,16 @@
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://cdn.counter.dev; connect-src 'self' https://rickandmortyapi.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://counter.dev; img-src 'self' data: https://rickandmortyapi.com https://www.google-analytics.com https://*.google-analytics.com https://c.bing.com https://*.clarity.ms; style-src 'self' 'unsafe-inline'; font-src 'self' data:;"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
