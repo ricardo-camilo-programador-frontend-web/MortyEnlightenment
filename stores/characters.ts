@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { ICharacter, IInfo } from '~/models/Character'
+import type { ICharacter, IInfo } from '~/models/Character'
 
 export const useCharactersStore = defineStore('charactersStore', {
   state: () => ({
@@ -13,7 +13,8 @@ export const useCharactersStore = defineStore('charactersStore', {
   },
   actions: {
     async getCharacters () {
-      const apiClient: any = useNuxtApp().apiClient
+      const nuxtApp = useNuxtApp() as any
+      const apiClient = nuxtApp.$apiClient ?? nuxtApp.apiClient
       const response = await apiClient.get('/character')
       const { results, info } = response.data
 

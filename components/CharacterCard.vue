@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ICharacter } from '~/models/Character'
+import type { ICharacter } from '~/models/Character'
 
 interface Props {
   character: ICharacter
@@ -20,9 +20,9 @@ const characterImage = computed(() => {
   >
     <div class="flex w-full h-52 rounded-xl flex-col justify-between items-center text-center lg:justify-center p-1">
       <img
-        :src="props.character.image"
+        :src="characterImage"
+        :alt="props.character.name"
         class="w-46 lg:w-24 rounded-full mx-auto"
-        placeholder
         loading="lazy"
       >
       <p class="text-3xl font-bold">
