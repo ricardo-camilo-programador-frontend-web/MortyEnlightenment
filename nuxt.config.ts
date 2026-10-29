@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: { head: { script: [{ src: '/rc-study-modal.js', defer: true }] } },
   ssr: false,
   nitro: {
     preset: 'static'
