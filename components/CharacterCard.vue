@@ -1,69 +1,79 @@
 <script setup lang="ts">
 import type { ICharacter } from '~/models/Character'
+import { labelGender, labelOrDash, labelStatus, statusTone } from '~/lib/catalog/labels'
 
 interface Props {
   character: ICharacter
-  class?: string
+  priority?: boolean
 }
 
-const props = defineProps<Props>()
-
-const characterImage = computed(() => {
-  return props.character.image
+const props = withDefaults(defineProps<Props>(), {
+  priority: false
 })
 
+defineEmits<{
+  open: []
+}>()
+
+const toneClass: Record<string, string> = {
+  alive: 'bg-alive-bg text-alive-fg',
+  dead: 'bg-dead-bg text-dead-fg',
+  unknown: 'bg-unknown-bg text-unknown-fg'
+}
 </script>
+
 <template>
-  <div
-    class="flex flex-col md:flex-row lg:flex-col bg-gray-100 p-4 rounded-xl basis-auto w-[17rem]"
-    :class="props.class"
-  >
-    <div class="flex w-full h-52 rounded-xl flex-col justify-between items-center text-center lg:justify-center p-1">
-      <img
-        :src="characterImage"
-        :alt="props.character.name"
-        class="w-46 lg:w-24 rounded-full mx-auto"
-        loading="lazy"
-      >
-      <p class="text-3xl font-bold">
+  <article class="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
+    <img
+      :src="props.character.image"
+      alt=""
+      width="300"
+      height="300"
+      :loading="props.priority ? 'eager' : 'lazy'"
+      :fetchpriority="props.priority ? 'high' : 'low'"
+      decoding="async"
+      class="h-44 w-full bg-input object-cover sm:h-52"
+    >
+    <div class="flex min-w-0 flex-1 flex-col gap-3 p-4">
+      <h3 class="break-words text-xl font-semibold leading-tight text-ink">
         {{ props.character.name }}
+      </h3>
+      <p>
+        <span class="sr-only">Situação: </span>
+        <span
+          class="inline-flex min-h-6 items-center rounded-full px-2.5 text-sm font-semibold"
+          :class="toneClass[statusTone(props.character.status)]"
+        >{{ labelStatus(props.character.status) }}</span>
+      </p>
+      <dl class="grid min-w-0 gap-2 text-sm">
+        <div class="min-w-0">
+          <dt class="text-muted">
+            Espécie
+          </dt>
+          <dd class="break-words text-ink">
+            {{ labelOrDash(props.character.species) }}
+          </dd>
+        </div>
+        <div class="min-w-0">
+          <dt class="text-muted">
+            Origem
+          </dt>
+          <dd class="break-words text-ink">
+            {{ labelOrDash(props.character.origin.name) }}
+          </dd>
+        </div>
+      </dl>
+      <button
+        type="button"
+        class="mt-auto inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-input px-4 text-sm font-semibold text-ink"
+        :aria-label="`Ver ficha de ${props.character.name}`"
+        @click="$emit('open')"
+      >
+        Ver ficha
+      </button>
+      <p class="sr-only">
+        Gênero {{ labelGender(props.character.gender) }}
       </p>
     </div>
-    <div class="flex flex-col mt-4 lg:w-10/12">
-      <div class="flex flex-wrap items-center">
-        <span class="text-sm font-bold">Status:&nbsp;</span>
-        <span class="w-full">{{ props.character.status }}</span>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <span class="text-sm font-bold">Species:&nbsp;</span>
-        <span class="w-full">{{ props.character.species }}</span>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <span class="text-sm font-bold">Type:&nbsp;</span>
-        <span class="w-full">{{ props.character.type }}</span>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <span class="text-sm font-bold">Gender:&nbsp;</span>
-        <span class="w-full">{{ props.character.gender }}</span>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <span class="text-sm font-bold">Origin:&nbsp;</span>
-        <span class="w-full">{{ props.character.origin.name }}</span>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <span class="text-sm font-bold">Location:&nbsp;</span>
-        <span class="w-full">{{ props.character.location.name }}</span>
-      </div>
-    </div>
-    <!-- <div class="flex flex-col mt-4">
-      <h2 class="text-xl font-bold">
-        Episodes
-      </h2>
-      <ul class="list-unstyled">
-        <li v-for="episode in props.character.episode" :key="episode">
-          <a :href="episode">{{ episode }}</a>
-        </li>
-      </ul>
-    </div> -->
-  </div>
+  </article>
 </template>

@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: { head: { script: [{ src: '/rc-study-modal.js', defer: true }] } },
+  app: {
+    head: {
+      meta: [{ name: 'theme-color', content: '#07140f' }],
+      link: [
+        { rel: 'preconnect', href: 'https://rickandmortyapi.com' },
+        { rel: 'dns-prefetch', href: 'https://rickandmortyapi.com' }
+      ],
+      script: [{ src: '/rc-study-modal.js', defer: true }]
+    }
+  },
+  spaLoadingTemplate: './app/spa-loading-template.html',
   ssr: false,
   nitro: {
     preset: 'static'
@@ -16,6 +26,10 @@ export default defineNuxtConfig({
     '~/plugins/api.ts',
     '~/plugins/analytics.client.ts'
   ],
+  tailwindcss: {
+    cssPath: '~/assets/css/main.css',
+    configPath: 'tailwind.config.js'
+  },
   devtools: {
     enabled: true,
     vscode: {}

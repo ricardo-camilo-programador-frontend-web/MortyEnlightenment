@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: #07140f;
+    color: #f3faf4;
+    color-scheme: dark;
+    scroll-padding-bottom: 5.5rem;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  :focus-visible {
+    outline: 3px solid #eaff7a;
+    outline-offset: 3px;
+    scroll-margin-bottom: 5.5rem;
+  }
+
+  ::placeholder {
+    color: #a9c2b2;
+    opacity: 1;
+  }
+
+  ::selection {
+    background: #d5ff5c;
+    color: #10210c;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+}
+
+@layer components {
+  .portal-shell {
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 420px at 100% -10%, rgba(213, 255, 92, 0.16), transparent 60%),
+      radial-gradient(700px 380px at -10% 10%, rgba(155, 231, 255, 0.1), transparent 55%),
+      #07140f;
+    color: #f3faf4;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    z-index: 40;
+    transform: translateY(-150%);
+    border-radius: 999px;
+    background: #d5ff5c;
+    color: #10210c;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    min-height: 2.75rem;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0.75rem);
+  }
+
+  .filters > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .filters:not([open]) > .filters-panel {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .filters[open] > .filters-panel {
+    display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
