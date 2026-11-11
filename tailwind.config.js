@@ -1,97 +1,42 @@
 /** @type {import('tailwindcss').Config} */
 /* eslint @typescript-eslint/no-var-requires: "off" */
+const tokens = require('./lib/design/tokens.js')
+
 module.exports = {
-  content: ['./src/**/*.{tsx,js,ts}'],
-  plugins: [],
+  content: [
+    './components/**/*.{vue,js,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './app.vue',
+    './plugins/**/*.{js,ts}'
+  ],
   theme: {
     extend: {
-      colors: {},
-      animation: {
-        fadeOut: 'fadeOut 5s ease-in-out',
-        'fade-in-from-left': 'fade-in-from-left 0.2s ease-in-out',
-        'fade-in-from-right': 'fade-in-from-right 0.2s ease-in-out',
-        pop: 'pop 0.2s ease-in-out',
-        'flip-and-bounce': 'flip-and-bounce 2s ease-in-out',
-        'enter-from-left': 'enter-from-left 0.4s ease-in-out',
-        'leave-to-left': 'leave-to-left 1s ease-in-out'
+      colors: tokens.colors,
+      fontFamily: {
+        sans: ['Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
+      },
+      fontSize: {
+        display: ['clamp(1.75rem, 4vw, 3rem)', { lineHeight: '1.1', letterSpacing: '-0.03em' }]
+      },
+      boxShadow: {
+        card: '0 16px 36px rgba(0, 0, 0, 0.35)'
       },
       keyframes: {
-        fadeOut: {
-          '0%': {
-            opacity: 1
-          },
-          '100%': {
-            opacity: 0,
-            transform: 'translateY( -100px )'
-          }
+        'portal-spin': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
         },
-        'fade-in-from-left': {
-          '0%': {
-            opacity: 0,
-            transform: 'translateX( -100px )'
-          },
-          '100%': {
-            opacity: 1,
-            transform: 'translateX( 0 )'
-          }
-        },
-        'fade-in-from-right': {
-          '0%': {
-            opacity: 0,
-            transform: 'translateX( 100px )'
-          },
-          '100%': {
-            opacity: 1,
-            transform: 'translateX( 0 )'
-          }
-        },
-        pop: {
-          '0%': {
-            opacity: '0',
-            transform: 'scale(0.5)'
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'scale(1)'
-          }
-        },
-        'flip-and-bounce': {
-          '0%': {
-            transform: 'rotateY(180deg) translateX(-20px)'
-          },
-          '50%': {
-            transform: 'rotateY(0deg)'
-          },
-          '80%': {
-            transform: 'rotateY(0deg) translateX(0)',
-            width: '95%'
-          },
-          '100%': {
-            transform: 'rotateY(0deg)',
-            width: '100%'
-          }
-        },
-        'enter-from-left': {
-          '0%': {
-            transform: 'translateX(-100%)',
-            opacity: 0
-          },
-          '100%': {
-            transform: 'translateX(0%)',
-            opacity: 1
-          }
-        },
-        'leave-to-left': {
-          '0%': {
-            transform: 'translateX(0%)',
-            opacity: 1
-          },
-          '100%': {
-            transform: 'translateX(-100%)',
-            opacity: 0
-          }
+        rise: {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
         }
+      },
+      animation: {
+        'portal-spin': 'portal-spin 18s linear infinite',
+        rise: 'rise 0.35s ease-out'
       }
     }
-  }
+  },
+  plugins: []
 }

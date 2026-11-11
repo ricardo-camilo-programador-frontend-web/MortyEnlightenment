@@ -4,3 +4,4 @@ dist
 .output
 .nuxt
 coverage
+app/spa-loading-template.html
